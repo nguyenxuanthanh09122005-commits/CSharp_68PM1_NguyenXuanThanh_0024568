@@ -28,6 +28,9 @@ namespace CSharp_68PM1_NguyenXuanThanh_0024568
             if (email == CorrectEmail && mssv == CorrectMSSV)
             {
                 MessageBox.Show("Đăng nhập thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                Form2 form2 = new Form2();
+                form2.Show();
+                this.Hide();
             }
             else
             {
