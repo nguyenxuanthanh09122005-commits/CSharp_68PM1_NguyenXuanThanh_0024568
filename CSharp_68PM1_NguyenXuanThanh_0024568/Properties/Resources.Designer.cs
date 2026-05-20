@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace CSharp_68PM1_NguyenXuanThanh_0024568.Properties
+namespace Login.Properties
 {
 
 
@@ -44,7 +44,7 @@ namespace CSharp_68PM1_NguyenXuanThanh_0024568.Properties
             {
                 if ((resourceMan == null))
                 {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("CSharp_68PM1_NguyenXuanThanh_0024568.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Login.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("CSharp_68PM1_NguyenXuanThanh_0024568")]
+[assembly: AssemblyTitle("Login")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("CSharp_68PM1_NguyenXuanThanh_0024568")]
+[assembly: AssemblyProduct("Login")]
 [assembly: AssemblyCopyright("Copyright ©  2026")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("c84bd3ee-5522-421c-9eb6-37ff055872a8")]
+[assembly: Guid("342140e4-0341-4c18-8329-fdb2ec7143e1")]
 
 // Version information for an assembly consists of the following four values:
 //

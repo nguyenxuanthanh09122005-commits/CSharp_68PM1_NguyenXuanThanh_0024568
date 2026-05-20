@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace CSharp_68PM1_NguyenXuanThanh_0024568.Properties
+namespace Login.Properties
 {
 
 

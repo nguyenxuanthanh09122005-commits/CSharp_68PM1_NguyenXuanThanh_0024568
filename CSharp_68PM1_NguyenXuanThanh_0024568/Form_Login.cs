@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -10,12 +10,12 @@ using System.Windows.Forms;
 
 namespace CSharp_68PM1_NguyenXuanThanh_0024568
 {
-    public partial class Form1 : Form
+    public partial class Form_Login : Form
     {
         private const string CorrectEmail = "nguyenxuanthanh09122005@gmail.com";
         private const string CorrectMSSV = "0024568";
 
-        public Form1()
+        public Form_Login()
         {
             InitializeComponent();
         }
@@ -28,8 +28,8 @@ namespace CSharp_68PM1_NguyenXuanThanh_0024568
             if (email == CorrectEmail && mssv == CorrectMSSV)
             {
                 MessageBox.Show("Đăng nhập thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                Form2 form2 = new Form2();
-                form2.Show();
+                Form_Main formMain = new Form_Main();
+                formMain.Show();
                 this.Hide();
             }
             else

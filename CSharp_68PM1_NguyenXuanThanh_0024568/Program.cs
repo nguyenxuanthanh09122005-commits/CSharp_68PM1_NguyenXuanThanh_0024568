@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -16,8 +16,7 @@ namespace CSharp_68PM1_NguyenXuanThanh_0024568
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
-            //Application.Run(new Form2());
+            Application.Run(new Form_Login());
         }
     }
 }
