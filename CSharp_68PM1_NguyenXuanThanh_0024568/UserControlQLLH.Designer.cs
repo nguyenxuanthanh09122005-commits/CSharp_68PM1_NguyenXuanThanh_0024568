@@ -1,16 +1,10 @@
-﻿namespace CSharp_68PM1_NguyenXuanThanh_0024568
+namespace CSharp_68PM1_NguyenXuanThanh_0024568
 {
     partial class UserControlQLLH
     {
-        /// <summary> 
-        /// Required designer variable.
-        /// </summary>
+
         private System.ComponentModel.IContainer components = null;
 
-        /// <summary> 
-        /// Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -22,10 +16,6 @@
 
         #region Component Designer generated code
 
-        /// <summary> 
-        /// Required method for Designer support - do not modify 
-        /// the contents of this method with the code editor.
-        /// </summary>
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
@@ -56,11 +46,9 @@
             this.btn_showSV = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.TableLop)).BeginInit();
             this.SuspendLayout();
-            // 
-            // TableLop
-            // 
-            this.TableLop.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+
+            this.TableLop.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.TableLop.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.TableLop.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -75,34 +63,22 @@
             this.TableLop.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.TableLop.Size = new System.Drawing.Size(800, 428);
             this.TableLop.TabIndex = 60;
-            // 
-            // Column1
-            // 
+
             this.Column1.HeaderText = "Mã SV";
             this.Column1.Name = "Column1";
-            // 
-            // Column2
-            // 
+
             this.Column2.HeaderText = "Họ và Tên";
             this.Column2.Name = "Column2";
-            // 
-            // Column3
-            // 
+
             this.Column3.HeaderText = "Giới tính";
             this.Column3.Name = "Column3";
-            // 
-            // Column4
-            // 
+
             this.Column4.HeaderText = "Ngày sinh";
             this.Column4.Name = "Column4";
-            // 
-            // Column5
-            // 
+
             this.Column5.HeaderText = "Lớp";
             this.Column5.Name = "Column5";
-            // 
-            // btn_search
-            // 
+
             this.btn_search.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btn_search.Location = new System.Drawing.Point(1055, 154);
             this.btn_search.Name = "btn_search";
@@ -110,18 +86,14 @@
             this.btn_search.TabIndex = 59;
             this.btn_search.Text = "Tìm";
             this.btn_search.UseVisualStyleBackColor = true;
-            // 
-            // txtSearch
-            // 
-            this.txtSearch.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+
+            this.txtSearch.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtSearch.Location = new System.Drawing.Point(350, 164);
             this.txtSearch.Name = "txtSearch";
             this.txtSearch.Size = new System.Drawing.Size(680, 20);
             this.txtSearch.TabIndex = 58;
-            // 
-            // Search
-            // 
+
             this.Search.AutoSize = true;
             this.Search.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Search.Location = new System.Drawing.Point(347, 121);
@@ -129,95 +101,73 @@
             this.Search.Size = new System.Drawing.Size(275, 18);
             this.Search.TabIndex = 57;
             this.Search.Text = "Tìm kiếm(Mã ID/ Mã Lớp /Tên Lớp):";
-            // 
-            // btn_reset
-            // 
+
             this.btn_reset.Location = new System.Drawing.Point(209, 507);
             this.btn_reset.Name = "btn_reset";
             this.btn_reset.Size = new System.Drawing.Size(104, 39);
             this.btn_reset.TabIndex = 56;
             this.btn_reset.Text = "Làm mới";
             this.btn_reset.UseVisualStyleBackColor = true;
-            // 
-            // btn_delete
-            // 
+
             this.btn_delete.Location = new System.Drawing.Point(65, 507);
             this.btn_delete.Name = "btn_delete";
             this.btn_delete.Size = new System.Drawing.Size(101, 39);
             this.btn_delete.TabIndex = 55;
             this.btn_delete.Text = "Xóa";
             this.btn_delete.UseVisualStyleBackColor = true;
-            // 
-            // btn_Update
-            // 
+
             this.btn_Update.Location = new System.Drawing.Point(209, 442);
             this.btn_Update.Name = "btn_Update";
             this.btn_Update.Size = new System.Drawing.Size(104, 43);
             this.btn_Update.TabIndex = 54;
             this.btn_Update.Text = "Sửa";
             this.btn_Update.UseVisualStyleBackColor = true;
-            // 
-            // btn_add
-            // 
+
             this.btn_add.Location = new System.Drawing.Point(65, 442);
             this.btn_add.Name = "btn_add";
             this.btn_add.Size = new System.Drawing.Size(101, 43);
             this.btn_add.TabIndex = 53;
             this.btn_add.Text = "Thêm";
             this.btn_add.UseVisualStyleBackColor = true;
-            // 
-            // txtmaClass
-            // 
+
             this.txtmaClass.Location = new System.Drawing.Point(65, 215);
             this.txtmaClass.Name = "txtmaClass";
             this.txtmaClass.Size = new System.Drawing.Size(248, 20);
             this.txtmaClass.TabIndex = 49;
-            // 
-            // txtmaID
-            // 
+
             this.txtmaID.Location = new System.Drawing.Point(65, 144);
             this.txtmaID.Name = "txtmaID";
             this.txtmaID.Size = new System.Drawing.Size(248, 20);
             this.txtmaID.TabIndex = 48;
-            // 
-            // txtnote
-            // 
+
             this.txtnote.AutoSize = true;
             this.txtnote.Location = new System.Drawing.Point(62, 340);
             this.txtnote.Name = "txtnote";
             this.txtnote.Size = new System.Drawing.Size(47, 13);
             this.txtnote.TabIndex = 46;
             this.txtnote.Text = "Ghi chú:";
-            // 
-            // birthday
-            // 
+
             this.birthday.AutoSize = true;
             this.birthday.Location = new System.Drawing.Point(62, 250);
             this.birthday.Name = "birthday";
             this.birthday.Size = new System.Drawing.Size(46, 13);
             this.birthday.TabIndex = 45;
             this.birthday.Text = "Tên lớp:";
-            // 
-            // name
-            // 
+
             this.name.AutoSize = true;
             this.name.Location = new System.Drawing.Point(62, 184);
             this.name.Name = "name";
             this.name.Size = new System.Drawing.Size(46, 13);
             this.name.TabIndex = 44;
             this.name.Text = "Mã lớp:";
-            // 
-            // maID
-            // 
+
             this.maID.AutoSize = true;
             this.maID.Location = new System.Drawing.Point(62, 111);
             this.maID.Name = "maID";
             this.maID.Size = new System.Drawing.Size(39, 13);
             this.maID.TabIndex = 43;
             this.maID.Text = "Mã ID:";
-            // 
-            // lbTitle
-            // 
+
             this.lbTitle.AutoSize = true;
             this.lbTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbTitle.Location = new System.Drawing.Point(50, 66);
@@ -226,42 +176,30 @@
             this.lbTitle.TabIndex = 42;
             this.lbTitle.Text = "Thông tin lớp học";
             this.lbTitle.Click += new System.EventHandler(this.label1_Click);
-            // 
-            // txtnameClass
-            // 
+
             this.txtnameClass.Location = new System.Drawing.Point(65, 285);
             this.txtnameClass.Name = "txtnameClass";
             this.txtnameClass.Size = new System.Drawing.Size(248, 20);
             this.txtnameClass.TabIndex = 61;
-            // 
-            // contextMenuStrip1
-            // 
+
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
-            // 
-            // contextMenuStrip2
-            // 
+
             this.contextMenuStrip2.Name = "contextMenuStrip2";
             this.contextMenuStrip2.Size = new System.Drawing.Size(61, 4);
-            // 
-            // textBox3
-            // 
+
             this.textBox3.Location = new System.Drawing.Point(65, 384);
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(248, 20);
             this.textBox3.TabIndex = 61;
-            // 
-            // btn_showSV
-            // 
+
             this.btn_showSV.Location = new System.Drawing.Point(65, 574);
             this.btn_showSV.Name = "btn_showSV";
             this.btn_showSV.Size = new System.Drawing.Size(248, 40);
             this.btn_showSV.TabIndex = 64;
             this.btn_showSV.Text = "Xem danh sách sinh viên";
             this.btn_showSV.UseVisualStyleBackColor = true;
-            // 
-            // UserControlQLLH
-            // 
+
             this.AutoScroll = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;

@@ -1,72 +1,82 @@
+using MySql.Data.MySqlClient;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace CSharp_68PM1_NguyenXuanThanh_0024568
 {
     public partial class UserControlQLSV : UserControl
     {
-        BindingList<Sinhvien> sinhviens = new BindingList<Sinhvien>();
+
+        CSharp_68PM1_NguyenXuanThanh_0024568.Database.Database db = new CSharp_68PM1_NguyenXuanThanh_0024568.Database.Database();
 
         public UserControlQLSV()
         {
             InitializeComponent();
             TableSV.AutoGenerateColumns = false;
-            TableSV.DataSource = sinhviens;
 
-            // Ánh xạ các cột nếu cần (Dựa trên tên thuộc tính của lớp Sinhvien)
             TableSV.Columns[0].DataPropertyName = "MaSV";
             TableSV.Columns[1].DataPropertyName = "HoTen";
             TableSV.Columns[2].DataPropertyName = "GioiTinh";
             TableSV.Columns[3].DataPropertyName = "NgaySinh";
             TableSV.Columns[4].DataPropertyName = "Lop";
 
-            // Đăng ký sự kiện
             Insert.Click += Insert_Click;
-            Update.Click += Update_Click;
             Delete.Click += Delete_Click;
             Reset.Click += Reset_Click;
             TableSV.CellClick += TableSV_CellClick;
             btn_search.Click += btn_search_Click;
+
+            this.Load += UserControlQLSV_Load;
+        }
+
+        private void LoadData()
+        {
+            try
+            {
+                TableSV.DataSource = db.GetTable("SELECT * FROM sinhvien");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi tải dữ liệu: " + ex.Message);
+            }
         }
 
         private void btn_search_Click(object sender, EventArgs e)
         {
-            string keyword = textBox1.Text.Trim().ToLower();
-            if (string.IsNullOrEmpty(keyword))
+            try
             {
-                TableSV.DataSource = sinhviens;
+                string keyword = "%" + textBox1.Text.Trim() + "%";
+                string sql = "SELECT * FROM SinhVien WHERE MaSV LIKE @k OR HoTen LIKE @k OR Lop LIKE @k";
+                MySqlParameter[] pars = { new MySqlParameter("@k", keyword) };
+                TableSV.DataSource = db.GetTable(sql, pars);
             }
-            else
+            catch (Exception ex)
             {
-                var filtered = sinhviens.Where(s =>
-                    (s.MaSV != null && s.MaSV.ToLower().Contains(keyword)) ||
-                    (s.HoTen != null && s.HoTen.ToLower().Contains(keyword)) ||
-                    (s.Lop != null && s.Lop.ToLower().Contains(keyword))
-                ).ToList();
-                TableSV.DataSource = new BindingList<Sinhvien>(filtered);
+                MessageBox.Show("Lỗi tìm kiếm: " + ex.Message);
             }
         }
 
         private void Insert_Click(object sender, EventArgs e)
         {
-            Sinhvien sv = new Sinhvien()
+            try
             {
-                MaSV = mssv_i.Text.Trim(),
-                HoTen = name_i.Text.Trim(),
-                NgaySinh = birthday_i.Value.ToString("dd/MM/yyyy"),
-                GioiTinh = genre_i.Text.Trim(),
-                Lop = class_i.Text.Trim(),
-            };
-            sinhviens.Add(sv);
-            MessageBox.Show("Thêm thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            ResetForm();
+                string sql = "INSERT INTO SinhVien (MaSV, HoTen, NgaySinh, GioiTinh, Lop) VALUES (@ma, @ten, @ns, @gt, @lop)";
+                MySqlParameter[] pars = {
+                    new MySqlParameter("@ma", mssv_i.Text.Trim()),
+                    new MySqlParameter("@ten", name_i.Text.Trim()),
+                    new MySqlParameter("@ns", birthday_i.Value.ToString("yyyy-MM-dd")),
+                    new MySqlParameter("@gt", genre_i.Text),
+                    new MySqlParameter("@lop", class_i.Text)
+                };
+                db.Execute(sql, pars);
+                MessageBox.Show("Thêm thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                LoadData();
+                ResetForm();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi thêm: " + ex.Message);
+            }
         }
 
         private void ResetForm()
@@ -84,7 +94,14 @@ namespace CSharp_68PM1_NguyenXuanThanh_0024568
             name_i.Text = name;
             try
             {
-                birthday_i.Value = DateTime.ParseExact(birthday, "dd/MM/yyyy", null);
+                if (DateTime.TryParse(birthday, out DateTime dt))
+                {
+                    birthday_i.Value = dt;
+                }
+                else
+                {
+                    birthday_i.Value = DateTime.ParseExact(birthday, "dd/MM/yyyy", null);
+                }
             }
             catch
             {
@@ -98,33 +115,44 @@ namespace CSharp_68PM1_NguyenXuanThanh_0024568
         {
             if (e.RowIndex >= 0)
             {
-                Sinhvien sv = (Sinhvien)TableSV.Rows[e.RowIndex].DataBoundItem;
-                if (sv != null)
-                {
-                    UpdateForm(sv.MaSV, sv.HoTen, sv.NgaySinh, sv.GioiTinh, sv.Lop);
-                }
+                DataGridViewRow row = TableSV.Rows[e.RowIndex];
+                UpdateForm(
+                    row.Cells[0].Value?.ToString(),
+                    row.Cells[1].Value?.ToString(),
+                    row.Cells[3].Value?.ToString(),
+                    row.Cells[2].Value?.ToString(),
+                    row.Cells[4].Value?.ToString()
+                );
             }
         }
 
         private void Update_Click(object sender, EventArgs e)
         {
-            if (TableSV.CurrentRow != null)
+            try
             {
-                Sinhvien updateSV = (Sinhvien)TableSV.CurrentRow.DataBoundItem;
-                updateSV.MaSV = mssv_i.Text.Trim();
-                updateSV.HoTen = name_i.Text.Trim();
-                updateSV.NgaySinh = birthday_i.Value.ToString("dd/MM/yyyy");
-                updateSV.GioiTinh = genre_i.Text;
-                updateSV.Lop = class_i.Text;
-                sinhviens.ResetBindings();
+                string sql = "UPDATE SinhVien SET HoTen=@ten, NgaySinh=@ns, GioiTinh=@gt, Lop=@lop WHERE MaSV=@ma";
+                MySqlParameter[] pars = {
+                    new MySqlParameter("@ma", mssv_i.Text.Trim()),
+                    new MySqlParameter("@ten", name_i.Text.Trim()),
+                    new MySqlParameter("@ns", birthday_i.Value.ToString("yyyy-MM-dd")),
+                    new MySqlParameter("@gt", genre_i.Text),
+                    new MySqlParameter("@lop", class_i.Text)
+                };
+                db.Execute(sql, pars);
                 MessageBox.Show("Cập nhật thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                LoadData();
                 ResetForm();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi cập nhật: " + ex.Message);
             }
         }
 
         private void Reset_Click(object sender, EventArgs e)
         {
             ResetForm();
+            LoadData();
         }
 
         private void Delete_Click(object sender, EventArgs e)
@@ -135,16 +163,30 @@ namespace CSharp_68PM1_NguyenXuanThanh_0024568
                    "Xác nhận xóa", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
                 if (result == DialogResult.Yes)
                 {
-                    Sinhvien deleteSV = (Sinhvien)TableSV.CurrentRow.DataBoundItem;
-                    sinhviens.Remove(deleteSV);
-                    MessageBox.Show("Xóa thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    try
+                    {
+                        string maSV = TableSV.CurrentRow.Cells[0].Value.ToString();
+                        string sql = "DELETE FROM SinhVien WHERE MaSV = @ma";
+                        MySqlParameter[] pars = { new MySqlParameter("@ma", maSV) };
+                        db.Execute(sql, pars);
+                        MessageBox.Show("Xóa thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        LoadData();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Lỗi xóa: " + ex.Message);
+                    }
                 }
             }
         }
 
         private void UserControlQLSV_Load(object sender, EventArgs e)
         {
+            LoadData();
+        }
 
+        private void TableSV_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
         }
     }
 }
