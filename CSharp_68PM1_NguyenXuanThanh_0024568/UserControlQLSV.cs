@@ -87,7 +87,7 @@ namespace CSharp_68PM1_NguyenXuanThanh_0024568
             genre_i.SelectedIndex = -1;
             class_i.SelectedIndex = -1;
         }
-
+        //Tạo form Update
         private void UpdateForm(string mssv, string name, string birthday, string genre, string classN)
         {
             mssv_i.Text = mssv;
