@@ -38,6 +38,24 @@ namespace CSharp_68PM1_NguyenXuanThanh_0024568
             this.Load += UserControlQLSV_Load;
         }
 
+        private void LoadClasses()
+        {
+            try
+            {
+                string sql = "SELECT MaLop, TenLop FROM lophoc";
+                System.Data.DataTable dt = db.GetTable(sql);
+                class_i.Items.Clear();
+                foreach (System.Data.DataRow row in dt.Rows)
+                {
+                    class_i.Items.Add($"{row["MaLop"]} - {row["TenLop"]}");
+                }
+            }
+            catch (Exception ex)
+            {
+                // Silent fail or log
+            }
+        }
+
         private void LoadData()
         {
             try
@@ -220,6 +238,7 @@ namespace CSharp_68PM1_NguyenXuanThanh_0024568
 
         private void UserControlQLSV_Load(object sender, EventArgs e)
         {
+            LoadClasses();
             LoadData();
         }
 
