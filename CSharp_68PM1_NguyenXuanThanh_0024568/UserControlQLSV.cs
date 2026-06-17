@@ -42,7 +42,7 @@ namespace CSharp_68PM1_NguyenXuanThanh_0024568
         {
             try
             {
-                string sql = "SELECT MaLop, TenLop FROM lophoc";
+                string sql = "SELECT MaLop, TenLop FROM lop";
                 System.Data.DataTable dt = db.GetTable(sql);
                 class_i.Items.Clear();
                 foreach (System.Data.DataRow row in dt.Rows)
@@ -54,6 +54,13 @@ namespace CSharp_68PM1_NguyenXuanThanh_0024568
             {
                 // Silent fail or log
             }
+        }
+
+        public void LoadByClass(string className)
+        {
+            textBox1.Text = className;
+            currentPage = 1;
+            LoadData();
         }
 
         private void LoadData()

@@ -23,6 +23,12 @@ namespace CSharp_68PM1_NguyenXuanThanh_0024568
             ucSV = new UserControlQLSV();
             ucLop = new UserControlQLLH();
 
+            ucLop.OnShowStudents += (className) =>
+            {
+                ucSV.LoadByClass(className);
+                ShowContent(ucSV);
+            };
+
             quảnLýSinhViênToolStripMenuItem.Click += quảnLýSinhViênToolStripMenuItem_Click;
             quảnLýLớpHọcToolStripMenuItem.Click += quảnLýLớpHọcToolStripMenuItem_Click;
             đăngXuấtToolStripMenuItem.Click += đăngXuấtToolStripMenuItem_Click;

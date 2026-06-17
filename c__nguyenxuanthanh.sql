@@ -24,10 +24,10 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `lophoc`
+-- Cấu trúc bảng cho bảng `lop`
 --
 
-CREATE TABLE `lophoc` (
+CREATE TABLE `lop` (
   `MaID` int(11) NOT NULL AUTO_INCREMENT,
   `MaLop` varchar(50) NOT NULL,
   `TenLop` varchar(100) NOT NULL,
@@ -36,10 +36,10 @@ CREATE TABLE `lophoc` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `lophoc`
+-- Đang đổ dữ liệu cho bảng `lop`
 --
 
-INSERT INTO `lophoc` (`MaLop`, `TenLop`, `GhiChu`) VALUES
+INSERT INTO `lop` (`MaLop`, `TenLop`, `GhiChu`) VALUES
 ('68PM1', 'Lớp 68PM1', 'Lớp Công nghệ phần mềm 1'),
 ('68PM2', 'Lớp 68PM2', 'Lớp Công nghệ phần mềm 2');
 

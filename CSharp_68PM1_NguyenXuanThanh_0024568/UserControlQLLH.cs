@@ -6,6 +6,9 @@ namespace CSharp_68PM1_NguyenXuanThanh_0024568
 {
     public partial class UserControlQLLH : UserControl
     {
+        public delegate void ShowStudentsEventHandler(string className);
+        public event ShowStudentsEventHandler OnShowStudents;
+
         CSharp_68PM1_NguyenXuanThanh_0024568.Database.Database db = new CSharp_68PM1_NguyenXuanThanh_0024568.Database.Database();
         int currentPage = 1;
         int pageSize = 5;
@@ -17,25 +20,39 @@ namespace CSharp_68PM1_NguyenXuanThanh_0024568
             InitializeComponent();
             TableLop.AutoGenerateColumns = false;
 
-            // Map DataGridView columns to Database fields
             TableLop.Columns[0].DataPropertyName = "MaID";
             TableLop.Columns[1].DataPropertyName = "MaLop";
             TableLop.Columns[2].DataPropertyName = "TenLop";
             TableLop.Columns[3].DataPropertyName = "GhiChu";
 
-            // Attach Event Handlers
             btn_add.Click += btn_add_Click;
             btn_Update.Click += btn_Update_Click;
             btn_delete.Click += btn_delete_Click;
             btn_reset.Click += btn_reset_Click;
             btn_search.Click += btn_search_Click;
             TableLop.CellClick += TableLop_CellClick;
+            btn_showSV.Click += btn_showSV_Click;
 
-            // Pagination Event Handlers
             btn_first.Click += (s, e) => { currentPage = 1; LoadData(); };
             btn_prev.Click += (s, e) => { if (currentPage > 1) { currentPage--; LoadData(); } };
             btn_next.Click += (s, e) => { if (currentPage < totalPages) { currentPage++; LoadData(); } };
             btn_last.Click += (s, e) => { currentPage = totalPages; LoadData(); };
+        }
+
+        private void btn_showSV_Click(object sender, EventArgs e)
+        {
+            if (TableLop.CurrentRow != null)
+            {
+                string className = TableLop.CurrentRow.Cells[1].Value?.ToString();
+                if (!string.IsNullOrEmpty(className))
+                {
+                    OnShowStudents?.Invoke(className);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Vui lòng chọn một lớp!");
+            }
         }
 
         private void LoadData()
@@ -62,7 +79,6 @@ namespace CSharp_68PM1_NguyenXuanThanh_0024568
                 int offset = (currentPage - 1) * pageSize;
                 string sql = "SELECT * FROM lop" + filter + $" LIMIT {offset}, {pageSize}";
 
-                // Reuse parameters for the main query
                 MySqlParameter[] queryPars = null;
                 if (!string.IsNullOrEmpty(txtSearch.Text.Trim()))
                 {
