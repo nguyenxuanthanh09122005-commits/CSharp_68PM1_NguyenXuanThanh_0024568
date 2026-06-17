@@ -35,5 +35,16 @@ namespace CSharp_68PM1_NguyenXuanThanh_0024568.Database
                 cmd.ExecuteNonQuery();
             }
         }
+
+        public object GetValue(string sql, MySqlParameter[] parameters = null)
+        {
+            using (MySqlConnection conn = GetConnection())
+            {
+                MySqlCommand cmd = new MySqlCommand(sql, conn);
+                if (parameters != null) cmd.Parameters.AddRange(parameters);
+                conn.Open();
+                return cmd.ExecuteScalar();
+            }
+        }
     }
 }

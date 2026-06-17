@@ -8,6 +8,10 @@ namespace CSharp_68PM1_NguyenXuanThanh_0024568
     {
 
         CSharp_68PM1_NguyenXuanThanh_0024568.Database.Database db = new CSharp_68PM1_NguyenXuanThanh_0024568.Database.Database();
+        int currentPage = 1;
+        int pageSize = 5;
+        int totalRecords = 0;
+        int totalPages = 1;
 
         public UserControlQLSV()
         {
@@ -26,6 +30,11 @@ namespace CSharp_68PM1_NguyenXuanThanh_0024568
             TableSV.CellClick += TableSV_CellClick;
             btn_search.Click += btn_search_Click;
 
+            btn_first.Click += (s, e) => { currentPage = 1; LoadData(); };
+            btn_prev.Click += (s, e) => { if (currentPage > 1) { currentPage--; LoadData(); } };
+            btn_next.Click += (s, e) => { if (currentPage < totalPages) { currentPage++; LoadData(); } };
+            btn_last.Click += (s, e) => { currentPage = totalPages; LoadData(); };
+
             this.Load += UserControlQLSV_Load;
         }
 
@@ -33,7 +42,37 @@ namespace CSharp_68PM1_NguyenXuanThanh_0024568
         {
             try
             {
-                TableSV.DataSource = db.GetTable("SELECT * FROM sinhvien");
+                string countSql = "SELECT COUNT(*) FROM sinhvien";
+                string filter = "";
+                MySqlParameter[] pars = null;
+
+                if (!string.IsNullOrEmpty(textBox1.Text.Trim()))
+                {
+                    filter = " WHERE MaSV LIKE @k OR HoTen LIKE @k OR Lop LIKE @k";
+                    countSql += filter;
+                    pars = new MySqlParameter[] { new MySqlParameter("@k", "%" + textBox1.Text.Trim() + "%") };
+                }
+
+                totalRecords = Convert.ToInt32(db.GetValue(countSql, pars));
+                totalPages = (int)Math.Ceiling((double)totalRecords / pageSize);
+                if (totalPages == 0) totalPages = 1;
+                if (currentPage > totalPages) currentPage = totalPages;
+                if (currentPage < 1) currentPage = 1;
+
+                int offset = (currentPage - 1) * pageSize;
+                string sql = "SELECT * FROM sinhvien" + filter + $" LIMIT {offset}, {pageSize}";
+                
+                // Reuse parameters for the main query
+                MySqlParameter[] queryPars = null;
+                if (!string.IsNullOrEmpty(textBox1.Text.Trim()))
+                {
+                    queryPars = new MySqlParameter[] { new MySqlParameter("@k", "%" + textBox1.Text.Trim() + "%") };
+                }
+
+                TableSV.DataSource = db.GetTable(sql, queryPars);
+
+                lbl_pageinfo.Text = $"Trang {currentPage}/{totalPages} | {totalRecords} bản ghi";
+                UpdatePaginationButtons();
             }
             catch (Exception ex)
             {
@@ -41,19 +80,18 @@ namespace CSharp_68PM1_NguyenXuanThanh_0024568
             }
         }
 
+        private void UpdatePaginationButtons()
+        {
+            btn_first.Enabled = currentPage > 1;
+            btn_prev.Enabled = currentPage > 1;
+            btn_next.Enabled = currentPage < totalPages;
+            btn_last.Enabled = currentPage < totalPages;
+        }
+
         private void btn_search_Click(object sender, EventArgs e)
         {
-            try
-            {
-                string keyword = "%" + textBox1.Text.Trim() + "%";
-                string sql = "SELECT * FROM SinhVien WHERE MaSV LIKE @k OR HoTen LIKE @k OR Lop LIKE @k";
-                MySqlParameter[] pars = { new MySqlParameter("@k", keyword) };
-                TableSV.DataSource = db.GetTable(sql, pars);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Lỗi tìm kiếm: " + ex.Message);
-            }
+            currentPage = 1;
+            LoadData();
         }
 
         private void Insert_Click(object sender, EventArgs e)
